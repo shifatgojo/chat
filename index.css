@@ -1,0 +1,214 @@
+/* General styles */
+:root {
+  --primary-bg: #f0f4f9;
+  --secondary-bg: #ffffff;
+  --header-bg: #4285f4;
+  --user-msg-bg: #dcf8c6;
+  --friend-msg-bg: #e9e9eb;
+  --text-dark: #333;
+  --text-light: #fff;
+  --border-color: #ddd;
+  --accent-color: #4CAF50; /* Default for User 1 */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  background-color: var(--primary-bg);
+  color: var(--text-dark);
+}
+
+/* Chat container layout */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--secondary-bg);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  background-color: var(--header-bg);
+  color: var(--text-light);
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+header p#current-user-indicator {
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-top: 4px;
+    opacity: 0.9;
+    transition: color 0.3s ease;
+}
+
+main#chat-history {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--primary-bg);
+}
+
+.initial-message {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    padding: 1rem 0;
+}
+
+/* Message styles */
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  max-width: 80%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.message .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.message .content {
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.user-message {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.user-message .content {
+  background-color: var(--user-msg-bg);
+  border-bottom-right-radius: 4px;
+}
+
+.friend-message {
+  align-self: flex-start;
+}
+
+.friend-message .content {
+  background-color: var(--friend-msg-bg);
+  border-bottom-left-radius: 4px;
+}
+
+.user-message .avatar {
+  background-color: #4CAF50;
+  color: white;
+}
+.friend-message .avatar {
+  background-color: #4285f4;
+  color: white;
+}
+
+/* Footer form */
+footer {
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--primary-bg);
+}
+
+#chat-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#user-switcher {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-dark);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.3s ease;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+}
+
+#user-switcher:hover {
+    background-color: #e0e0e0;
+    transform: rotate(180deg);
+}
+
+#message-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  font-size: 1rem;
+  background-color: var(--secondary-bg);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#message-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-color) 20%, transparent);
+}
+
+#send-button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+#send-button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+#send-button:disabled {
+  background-color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
